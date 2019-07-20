@@ -4,8 +4,8 @@ package swan_miniprogram
 
 // Response 基础数据
 type CommonResponse struct {
-	Errcode int    `json:"error,omitempty"`
-	Errmsg  string `json:"error_description,omitempty"`
+	Error            string `json:"error"`
+	ErrorDescription string `json:"error_description"`
 }
 
 type LoginResponse struct {

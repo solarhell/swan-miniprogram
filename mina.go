@@ -11,7 +11,7 @@ func Login(appKey, appSecret, code string) (lr LoginResponse, err error) {
 		return lr, err
 	}
 
-	r, err := req.Get(api)
+	r, err := req.Post(api)
 	if err != nil {
 		return lr, err
 	}
