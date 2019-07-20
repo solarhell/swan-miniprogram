@@ -1,28 +1,26 @@
 package swan_miniprogram
 
 import (
-	"encoding/json"
 	"errors"
+	"github.com/imroc/req"
 )
 
-func (c *Client) GetAccessToken(appKey, appSecret string) (ak AccessToken, err error) {
+func GetAccessToken(appKey, appSecret string) (ak AccessToken, err error) {
 	api, err := TokenURL(appKey, appSecret)
 	if err != nil {
 		return ak, err
 	}
 
-	res, err := c.client.Get(api)
-
+	r, err := req.Get(api)
 	if err != nil {
 		return ak, err
 	}
-	defer res.Body.Close()
 
-	if res.StatusCode != 200 {
+	if r.Response().StatusCode != 200 {
 		return ak, ErrConnectBaiduServer
 	}
 
-	err = json.NewDecoder(res.Body).Decode(&ak)
+	err = r.ToJSON(&ak)
 	if err != nil {
 		return ak, err
 	}

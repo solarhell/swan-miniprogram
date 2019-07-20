@@ -6,8 +6,10 @@
 ## done
 登录
 AccessToken(需持久化 防止超过请求限制)
+数据解密
 
 ## todo
+模板消息
 
 
 ## usage
@@ -18,25 +20,10 @@ package main
 
 import (
 	swan "github.com/solarhell/swan-miniprogram"
-	"net/http"
-	"time"
 )
 
 func main() {
-	c := swan.NewClient(&http.Client{
-		Timeout: 30 * time.Second,
-		Transport: &swan.DebugRequestTransport{
-			RequestHeader:  true,
-			RequestBody:    true,
-			ResponseHeader: true,
-			ResponseBody:   true,
-			Transport: &http.Transport{
-				IdleConnTimeout: 30 * time.Second,
-	        },
-		},
-	})
-
-	ui, err := c.Login("appKey", "appSecret", "code")
+	ui, err := swan.Login("appKey", "appSecret", "code")
 	...
 }
 ```
