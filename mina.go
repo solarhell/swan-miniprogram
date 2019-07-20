@@ -24,8 +24,8 @@ func Login(appKey, appSecret, code string) (lr LoginResponse, err error) {
 	if err != nil {
 		return lr, err
 	}
-	if lr.Errcode != 0 {
-		return lr, errors.New(lr.Errmsg)
+	if lr.Error != "" {
+		return lr, errors.New(lr.ErrorDescription)
 	}
 
 	return lr, nil

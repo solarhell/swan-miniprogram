@@ -25,8 +25,8 @@ func GetAccessToken(appKey, appSecret string) (ak AccessToken, err error) {
 		return ak, err
 	}
 
-	if ak.Errcode != 0 {
-		return ak, errors.New(ak.Errmsg)
+	if ak.Error != "" {
+		return ak, errors.New(ak.ErrorDescription)
 	}
 
 	return ak, nil
